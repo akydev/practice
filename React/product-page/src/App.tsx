@@ -25,13 +25,13 @@ function App() {
           display: "flex",
           flex: "wrap",
           justifyContent: "space-between",
-          gap: "16px",
+          // gap: "18px",
         }}
       >
         {productData.map((value) => {
           return (
-            <Col>
-              <Card style={{ width: "23rem", height: "auto" }}>
+            <Col style={{ marginTop: "34px" }}>
+              <Card style={{ width: "23rem", height: "100%" }}>
                 <Carousel>
                   {value.images.map((image, index) => (
                     <Carousel.Item key={index}>
@@ -49,7 +49,6 @@ function App() {
                   <Card.Text>{value.category.name}</Card.Text>
                   <Card.Text>{value.price}</Card.Text>
                   {/* <Card.Text>{value.creationAt}</Card.Text> */}
-
                   <Button variant="primary">Add to Cart</Button>
                 </Card.Body>
               </Card>
