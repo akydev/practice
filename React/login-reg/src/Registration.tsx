@@ -8,7 +8,7 @@ const initailValues: IReg = {
   lastName: "",
   email: "",
   password: "",
-  confirmPassword: "", // Corrected typo
+  confirmPassword: "",
 };
 
 const Registration = () => {
@@ -21,9 +21,10 @@ const Registration = () => {
       lastName: "",
       email: "",
       password: "",
-      confirmPassword: "", // Corrected typo
+      confirmPassword: "",
     };
 
+    // Validate fields
     if (!regData.firstName) {
       newErrors.firstName = "Please enter your firstname!";
     }
@@ -43,21 +44,24 @@ const Registration = () => {
       newErrors.confirmPassword = "Password does not match!";
     }
 
+    // Update the error state
     setError(newErrors);
-    return Object.keys(newErrors).length === 0;
+
+    // Return true only if there are no errors (i.e., no non-empty values in newErrors)
+    return Object.values(newErrors).every((error) => error === "");
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault(); // Prevents the default action (navigation)
     if (!validateData()) {
-      console.log("❌ Validation failed:", error);
+      console.log("Validation failed:", error);
       return;
     }
 
     // Reset errors after validation passes
     setError(initailValues);
 
-    console.log("✅ Validation passed, proceeding with API request...");
+    console.log("Validation passed, proceeding with API request...");
 
     try {
       console.log(regData);
