@@ -17,7 +17,7 @@ const productSlice = createSlice({
   name: "productPage",
   initialState,
   reducers: {
-    productRequest: (state: IInitialProduct, action) => {
+    productRequest: (state: IInitialProduct) => {
       state.loading = true;
     },
     productSuccess: (

@@ -17,5 +17,5 @@ function* productSaga() {
 }
 
 export default function* watcherProduct() {
-  yield takeEvery(productRequest, productSaga);
+  yield takeEvery(productRequest().type, productSaga);
 }
