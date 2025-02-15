@@ -1,12 +1,33 @@
-import React, { useState } from "react";
-import { Button, Card, Container, Form, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import {
+  Alert,
+  Button,
+  Card,
+  Container,
+  Form,
+  Row,
+  Spinner,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, AppState } from "./redux/store/store";
 import { registerRequest, registerUpdate } from "./redux/slice/registerSlice";
 import { IRegister } from "./redux/type/IRegister";
 
+// const validateForm = () => {
+//   const fields: (keyof IRegister)[] = ["firstName", "lastName", "email", "password"];
+
+//   const newErrors = fields.reduce((acc, field) => {
+//     if (!data[field]) acc[field] = `Enter your ${field.replace(/([A-Z])/g, " $1").toLowerCase()}.`;
+//     return acc;
+//   }, {} as IRegister);
+
+//   setError(newErrors);
+//   return !Object.values(newErrors).some(Boolean);
+// };
+
 const Register = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const { loading, data, user, error } = useSelector(
     (state: AppState) => state.register
   );
@@ -55,6 +76,13 @@ const Register = () => {
       dispatch(registerRequest(data));
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      setSuccessMsg("User Register Successfully!");
+      setTimeout(() => setSuccessMsg(null), 3000);
+    }
+  }, [user]);
   // console.log(data);
   return (
     <Container>
@@ -85,6 +113,7 @@ const Register = () => {
           >
             Register
           </Card.Body>
+          {successMsg && <Alert variant="success">{successMsg}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label style={{ fontWeight: 500, color: "#30368b" }}>
@@ -150,8 +179,13 @@ const Register = () => {
                 {formErrors.password}
               </Form.Control.Feedback>
             </Form.Group>
-            <Button type="submit" variant="dark" style={{ width: "100%" }}>
-              Submit
+            <Button
+              type="submit"
+              variant="dark"
+              style={{ width: "100%" }}
+              disabled={loading}
+            >
+              {loading ? <Spinner animation="border" size="sm" /> : "Submit"}
             </Button>
           </Form>
         </Card>
