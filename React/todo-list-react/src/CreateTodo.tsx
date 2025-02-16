@@ -6,12 +6,11 @@ const CreateTodo = () => {
       <Row
         style={{
           display: "flex",
-          //   alignItems: "center",
           justifyContent: "center",
+          alignItems: "center",
           height: "100vh",
         }}
       >
-        <Col></Col>
         <Card
           style={{
             width: "56rem",
@@ -39,62 +38,42 @@ const CreateTodo = () => {
               controlId="fromPlaintextEmail"
             >
               <Form.Label column sm="2">
-                Fisrtname
+                Todo
               </Form.Label>
               <Col sm="10">
                 <Form.Control
-                  name="firstName"
+                  name="toDO"
                   type="text"
-                  placeholder="Enter your firstname!"
+                  placeholder="Add new task!"
                 />
               </Col>
             </Form.Group>
+            {/* <Form.Group
+              as={Row}
+              className="mb-3"
+              controlId="fromPlaintextEmail"
+            >
+              <Form.Label column sm="2">
+                UserId
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  name="toDO"
+                  type="text"
+                  placeholder="Enter your UserId!"
+                />
+              </Col>
+            </Form.Group> */}
             <Form.Group
               as={Row}
               className="mb-3"
               controlId="fromPlaintextEmail"
             >
               <Form.Label column sm="2">
-                Fisrtname
+                Status
               </Form.Label>
               <Col sm="10">
-                <Form.Control
-                  name="firstName"
-                  type="text"
-                  placeholder="Enter your firstname!"
-                />
-              </Col>
-            </Form.Group>
-            <Form.Group
-              as={Row}
-              className="mb-3"
-              controlId="fromPlaintextEmail"
-            >
-              <Form.Label column sm="2">
-                Fisrtname
-              </Form.Label>
-              <Col sm="10">
-                <Form.Control
-                  name="firstName"
-                  type="text"
-                  placeholder="Enter your firstname!"
-                />
-              </Col>
-            </Form.Group>
-            <Form.Group
-              as={Row}
-              className="mb-3"
-              controlId="fromPlaintextEmail"
-            >
-              <Form.Label column sm="2">
-                Fisrtname
-              </Form.Label>
-              <Col sm="10">
-                <Form.Control
-                  name="firstName"
-                  type="text"
-                  placeholder="Enter your firstname!"
-                />
+                <Form.Check type="switch" />
               </Col>
             </Form.Group>
             <Button
@@ -107,7 +86,7 @@ const CreateTodo = () => {
                 margin: "0 auto", // This helps center the button
               }}
             >
-              Submit
+              Add
             </Button>
           </Form>
         </Card>
