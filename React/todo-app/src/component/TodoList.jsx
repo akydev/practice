@@ -64,7 +64,6 @@ const TodoList = () => {
     <Container>
       <h1 className="text-center">Todo Application</h1>
 
-      {/* Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop */}
       {/* todo add */}
       <Row>
         <Col xs={4} md={3}></Col>
