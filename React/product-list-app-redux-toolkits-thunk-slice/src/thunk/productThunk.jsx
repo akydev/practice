@@ -3,6 +3,7 @@ import {
   fetchProductByIdService,
   fetchProductsService,
 } from "../services/productService";
+import { addProductService } from "../services/addProductService";
 
 export const productThunk = createAsyncThunk(
   "product/productThunk",
@@ -17,5 +18,13 @@ export const fetchProductByIdThunk = createAsyncThunk(
   async (id) => {
     const product = await fetchProductByIdService(id);
     return product;
+  }
+);
+
+export const addProductThunk = createAsyncThunk(
+  "addProduct/addProductThunk",
+  async (product) => {
+    const response = await addProductService(product);
+    return response;
   }
 );
