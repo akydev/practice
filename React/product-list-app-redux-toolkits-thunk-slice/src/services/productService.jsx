@@ -11,3 +11,15 @@ export const fetchProductsService = async () => {
     throw new Error(errorMessage);
   }
 };
+
+export const fetchProductByIdService = async (id) => {
+  try {
+    const response = await axios.get(`https://dummyjson.com/products/${id}`);
+    return response.data;
+  } catch (error) {
+    const errorMessage = error.response
+      ? error.response.data.message
+      : "Product not found";
+    throw new Error(errorMessage);
+  }
+};

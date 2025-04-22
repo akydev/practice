@@ -3,12 +3,21 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { productThunk } from "../thunk/productThunk";
+import { useNavigate } from "react-router-dom";
+
 const Product = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { loading, products, error } = useSelector((state) => state.products);
   useEffect(() => {
     dispatch(productThunk());
   }, []);
+
+  const handleProductClick = (id) => {
+    navigate(`/product/${id}`);
+  };
+
   return (
     <Container>
       <h1 className="text-center">Product Lists</h1>
@@ -28,10 +37,17 @@ const Product = () => {
                   height={220}
                 />
                 <Card.Body>
-                  <h1>Product</h1>
                   <Card.Title>{product.title}</Card.Title>
                   <Card.Text>{product.description}</Card.Text>
                 </Card.Body>
+                <Card.Footer className="text-center">
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => handleProductClick(product.id)}
+                  >
+                    View Product
+                  </button>
+                </Card.Footer>
               </Card>
             </Col>
           ))
