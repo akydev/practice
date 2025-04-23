@@ -18,6 +18,10 @@ const Product = () => {
     navigate(`/product/${id}`);
   };
 
+  const handleProductEdit = (id) => {
+    navigate(`/edit-product/${id}`);
+  };
+
   const handleProductDelete = (id) => {
     dispatch(deleteProductThunk(id));
     alert("Product deleted successfully...");
@@ -52,7 +56,12 @@ const Product = () => {
                   >
                     VIEW
                   </Button>
-                  <Button variant="outline-success">EDIT</Button>
+                  <Button
+                    variant="outline-success"
+                    onClick={() => handleProductEdit(product.id)}
+                  >
+                    EDIT
+                  </Button>
                   <Button
                     variant="outline-danger"
                     onClick={() => handleProductDelete(product.id)}

@@ -10,7 +10,6 @@ const Navigationbar = () => {
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/product">Product</Nav.Link>
           <Nav.Link href="/add-product">Add Product</Nav.Link>
-          <Nav.Link href="/edit-product">Edit Product</Nav.Link>
           <Nav.Link href="#pricing">Pricing</Nav.Link>
         </Nav>
       </Container>

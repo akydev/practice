@@ -48,7 +48,7 @@ export const editProductService = async (id, product) => {
       product
     );
     if (response.status === 200) {
-      return;
+      return response.data;
     }
   } catch (error) {
     const errorMessage =

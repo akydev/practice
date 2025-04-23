@@ -1,24 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { editProductThunk } from "../thunk/productThunk";
+import { editProductThunk, fetchProductByIdThunk } from "../thunk/productThunk";
+import { editProduct } from "../slice/editProductSlice";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditProduct = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // for redirecting to the product page.
+  const { id } = useParams(); // catch the id from the URL
+
+  // Fetching the product data by id
+  const { selectedProduct } = useSelector((state) => state.products);
+
+  // sending the data to the editProductSlice for editing the product
   const { product, loading, error, success } = useSelector(
     (state) => state.editProduct
   );
 
+  // console.log("Edit Product", product.title);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    dispatch(setProduct({ [name]: value }));
+    dispatch(editProduct({ [name]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(editProductThunk(id, product));
     alert("Product Edit successfully!");
+    navigate("/product"); // redirect to the products page after editing product.
   };
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchProductByIdThunk(id));
+    }
+  }, [id, dispatch]);
+
+  useEffect(() => {
+    if (selectedProduct) {
+      dispatch(editProduct(selectedProduct));
+    }
+  }, [selectedProduct, dispatch]);
 
   return (
     <Container>

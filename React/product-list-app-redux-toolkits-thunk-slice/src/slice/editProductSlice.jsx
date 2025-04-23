@@ -14,7 +14,11 @@ const initialState = {
 const editProductSlice = createSlice({
   name: "editProduct",
   initialState,
-  reducers: {},
+  reducers: {
+    editProduct: (state, action) => {
+      state.product = { ...state.product, ...action.payload };
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(editProductThunk.pending, (state) => {
@@ -30,6 +34,6 @@ const editProductSlice = createSlice({
   },
 });
 
-export const {} = editProductSlice.actions;
+export const { editProduct } = editProductSlice.actions;
 
 export default editProductSlice.reducer;
