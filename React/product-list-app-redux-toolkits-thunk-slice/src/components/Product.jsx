@@ -1,8 +1,8 @@
 import React from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { productThunk } from "../thunk/productThunk";
+import { deleteProductThunk, productThunk } from "../thunk/productThunk";
 import { useNavigate } from "react-router-dom";
 
 const Product = () => {
@@ -14,14 +14,19 @@ const Product = () => {
     dispatch(productThunk());
   }, []);
 
-  const handleProductClick = (id) => {
+  const handleProductView = (id) => {
     navigate(`/product/${id}`);
+  };
+
+  const handleProductDelete = (id) => {
+    dispatch(deleteProductThunk(id));
+    alert("Product deleted successfully...");
   };
 
   return (
     <Container>
       <h1 className="text-center">Product Lists</h1>
-      <Row xs={1} md={3} className="g-4">
+      <Row xs={1} md={2} lg={3} xl={4} className="py-4 g-4">
         {loading ? (
           <Col>Loading...</Col>
         ) : error ? (
@@ -29,7 +34,7 @@ const Product = () => {
         ) : (
           products.map((product) => (
             <Col key={product.id}>
-              <Card>
+              <Card className="h-100">
                 <Card.Img
                   variant="top"
                   src={product.thumbnail}
@@ -40,13 +45,20 @@ const Product = () => {
                   <Card.Title>{product.title}</Card.Title>
                   <Card.Text>{product.description}</Card.Text>
                 </Card.Body>
-                <Card.Footer className="text-center">
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => handleProductClick(product.id)}
+                <Card.Footer className=" d-flex justify-content-evenly">
+                  <Button
+                    variant="outline-primary"
+                    onClick={() => handleProductView(product.id)}
                   >
-                    View Product
-                  </button>
+                    VIEW
+                  </Button>
+                  <Button variant="outline-success">EDIT</Button>
+                  <Button
+                    variant="outline-danger"
+                    onClick={() => handleProductDelete(product.id)}
+                  >
+                    DELETE
+                  </Button>
                 </Card.Footer>
               </Card>
             </Col>

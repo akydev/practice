@@ -1,13 +1,12 @@
 import React from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addProductThunk } from "../thunk/productThunk";
-import { resetProduct, setProduct } from "../slice/addProductSlice";
+import { editProductThunk } from "../thunk/productThunk";
 
-const AddProduct = () => {
+const EditProduct = () => {
   const dispatch = useDispatch();
   const { product, loading, error, success } = useSelector(
-    (state) => state.addProduct
+    (state) => state.editProduct
   );
 
   const handleChange = (e) => {
@@ -17,15 +16,13 @@ const AddProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addProductThunk(product));
-    alert("Product added successfully!");
-    if (success === true) {
-      dispatch(resetProduct());
-    }
+    dispatch(editProductThunk(id, product));
+    alert("Product Edit successfully!");
   };
+
   return (
     <Container>
-      <h1 className="text-center pt-4"> Add Product Details</h1>
+      <h1 className="text-center pt-4"> Edit Product Details</h1>
       <Row
         xs={1}
         md={3}
@@ -63,4 +60,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;

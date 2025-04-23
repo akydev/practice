@@ -5,6 +5,7 @@ import Navigationbar from "./components/Navigationbar";
 import Product from "./components/Product";
 import SingleProduct from "./components/SingleProduct";
 import AddProduct from "./components/AddProduct";
+import EditProduct from "./components/EditProduct";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/product" element={<Product />} />
             <Route path="/product/:id" element={<SingleProduct />} />
             <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/edit-product" element={<EditProduct />} />
             <Route path="/pricing" element={<h1>Pricing</h1>} />
             <Route path="/about" element={<h1>About</h1>} />
             <Route path="/contact" element={<h1>Contact</h1>} />
