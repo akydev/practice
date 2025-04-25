@@ -2,11 +2,17 @@ import React, { useEffect } from "react";
 import { Button, Card, Carousel, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductRequest } from "../redux/slice/productSlice";
+import { useNavigate } from "react-router-dom";
 
 const Product = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { loading, products, error } = useSelector((state) => state.product);
+
+  const handleView = (id) => {
+    navigate(`/product/${id}`);
+  };
 
   useEffect(() => {
     dispatch(fetchProductRequest());
@@ -31,7 +37,12 @@ const Product = () => {
                 <Card.Text>{val.description}</Card.Text>
               </Card.Body>
               <Card.Footer className=" d-flex justify-content-evenly">
-                <Button variant="outline-primary">VIEW</Button>
+                <Button
+                  variant="outline-primary"
+                  onClick={() => handleView(val.id)}
+                >
+                  VIEW
+                </Button>
                 <Button variant="outline-success">EDIT</Button>
                 <Button variant="outline-danger">DELETE</Button>
               </Card.Footer>

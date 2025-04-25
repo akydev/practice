@@ -1,9 +1,12 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { fetchProducts } from "../services/productService";
+import { fetchProducts, viewProductById } from "../services/productService";
 import {
   fetchProductRequest,
   fetchProductSuccess,
   fetchProductError,
+  fetchViewProductRequest,
+  fetchViewProductSuccess,
+  fetchViewProductError,
 } from "../slice/productSlice";
 
 function* productSaga() {
@@ -17,4 +20,16 @@ function* productSaga() {
 
 export function* watcherProductSaga() {
   yield takeEvery(fetchProductRequest, productSaga);
+}
+
+function* viewProductSaga(action) {
+  try {
+    const response = yield call(viewProductById, action.payload);
+    yield put(fetchViewProductSuccess(response));
+  } catch (error) {
+    yield put(fetchViewProductError(error));
+  }
+}
+export function* watherViewProductSaga() {
+  yield takeEvery(fetchViewProductRequest, viewProductSaga);
 }
