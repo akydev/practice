@@ -14,7 +14,7 @@ export const fetchProducts = async () => {
   }
 };
 
-export const viewProductById = async () => {
+export const viewProductById = async (id) => {
   try {
     const response = await axios.get(
       `https://api.escuelajs.co/api/v1/products/${id}`
@@ -23,6 +23,6 @@ export const viewProductById = async () => {
   } catch (error) {
     const errorMessage =
       error.response?.data?.message || "Product is not found.";
-    throw new error(error);
+    throw new Error(errorMessage);
   }
 };

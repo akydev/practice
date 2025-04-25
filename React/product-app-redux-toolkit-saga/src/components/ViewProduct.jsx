@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Carousel, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchViewProductRequest } from "../redux/slice/productSlice";
 
 const ViewProduct = () => {
   const dispatch = useDispatch();
-  const id = useParams();
+  const { id } = useParams();
   const { loading, selectedProduct, error } = useSelector(
     (state) => state.product
   );
