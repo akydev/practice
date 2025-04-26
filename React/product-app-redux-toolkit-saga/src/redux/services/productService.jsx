@@ -26,3 +26,17 @@ export const viewProductById = async (id) => {
     throw new Error(errorMessage);
   }
 };
+
+export const addProduct = async (product) => {
+  try {
+    const response = await axios.post(
+      `https://api.escuelajs.co/api/v1/products`,
+      product
+    );
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message || "Add product is failed.";
+    throw new Error(errorMessage);
+  }
+};
