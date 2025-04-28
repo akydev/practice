@@ -1,6 +1,7 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import {
   addProduct,
+  deleteProduct,
   fetchProducts,
   viewProductById,
 } from "../services/productService";
@@ -11,6 +12,9 @@ import {
   fetchViewProductRequest,
   fetchViewProductSuccess,
   fetchViewProductError,
+  deleteProductError,
+  deleteProductRequest,
+  deleteProductSuccess,
 } from "../slice/productSlice";
 import {
   addProductError,
@@ -54,4 +58,17 @@ export function* addProductSaga(action) {
 
 export function* watcherAddProductSaga() {
   yield takeEvery(addProductRequest, addProductSaga);
+}
+
+export function* deleteProductSaga(action) {
+  try {
+    const response = yield call(deleteProduct, action.payload);
+    yield put(deleteProductSuccess(response));
+  } catch (error) {
+    yield put(deleteProductError(error));
+  }
+}
+
+export function* watcherDeleteProductSaga() {
+  yield takeEvery(deleteProductRequest, deleteProductSaga);
 }

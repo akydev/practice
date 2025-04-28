@@ -1,7 +1,18 @@
-import React, { useEffect } from "react";
-import { Button, Card, Carousel, Col, Container, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import {
+  Button,
+  Card,
+  Carousel,
+  Col,
+  Container,
+  Modal,
+  Row,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProductRequest } from "../redux/slice/productSlice";
+import {
+  deleteProductRequest,
+  fetchProductRequest,
+} from "../redux/slice/productSlice";
 import { useNavigate } from "react-router-dom";
 
 const Product = () => {
@@ -9,6 +20,8 @@ const Product = () => {
   const navigate = useNavigate();
 
   const { loading, products, error } = useSelector((state) => state.product);
+  const [openModal, SetOpenModal] = useState(false);
+  const [productId, setProductId] = useState(null);
 
   const handleView = (id) => {
     navigate(`/product/${id}`);
@@ -17,6 +30,23 @@ const Product = () => {
   useEffect(() => {
     dispatch(fetchProductRequest());
   }, [dispatch]);
+
+  const handleDeleteOpen = (id) => {
+    if (id) {
+      SetOpenModal(true);
+      setProductId(id);
+    }
+  };
+
+  const handleDelete = () => {
+    if (productId) {
+      dispatch(deleteProductRequest(productId));
+      setTimeout(() => {
+        SetOpenModal(false);
+        dispatch(fetchProductRequest());
+      }, 1000);
+    }
+  };
 
   return (
     <Container>
@@ -44,12 +74,38 @@ const Product = () => {
                   VIEW
                 </Button>
                 <Button variant="outline-success">EDIT</Button>
-                <Button variant="outline-danger">DELETE</Button>
+                <Button
+                  variant="outline-danger"
+                  onClick={() => handleDeleteOpen(val.id)}
+                >
+                  DELETE
+                </Button>
               </Card.Footer>
             </Card>
           </Col>
         ))}
       </Row>
+
+      {/* Delete Modal For Product */}
+      <Modal
+        show={openModal}
+        onHide={() => SetOpenModal(false)}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Product</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are You Sure Delete This Product.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => SetOpenModal(false)}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

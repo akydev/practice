@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// Fetch Product and display product
 export const fetchProducts = async () => {
   try {
     const response = await axios.get(
@@ -14,6 +15,7 @@ export const fetchProducts = async () => {
   }
 };
 
+// View Product
 export const viewProductById = async (id) => {
   try {
     const response = await axios.get(
@@ -27,6 +29,7 @@ export const viewProductById = async (id) => {
   }
 };
 
+// Add product.
 export const addProduct = async (product) => {
   try {
     const response = await axios.post(
@@ -37,6 +40,20 @@ export const addProduct = async (product) => {
   } catch (error) {
     const errorMessage =
       error.response?.data?.message || "Add product is failed.";
+    throw new Error(errorMessage);
+  }
+};
+
+// Delete product
+export const deleteProduct = async (id) => {
+  try {
+    const response = await axios.delete(
+      `https://api.escuelajs.co/api/v1/products/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message || "Product deleted successfully.";
     throw new Error(errorMessage);
   }
 };

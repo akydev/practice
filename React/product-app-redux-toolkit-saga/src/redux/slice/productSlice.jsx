@@ -36,6 +36,17 @@ const productSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    deleteProductRequest: (state, action) => {
+      state.loading = true;
+      state.productId = action.payload;
+    },
+    deleteProductSuccess: (state, action) => {
+      state.loading = false;
+    },
+    deleteProductError: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -46,6 +57,9 @@ export const {
   fetchViewProductRequest,
   fetchViewProductSuccess,
   fetchViewProductError,
+  deleteProductRequest,
+  deleteProductSuccess,
+  deleteProductError,
 } = productSlice.actions;
 
 export default productSlice.reducer;
