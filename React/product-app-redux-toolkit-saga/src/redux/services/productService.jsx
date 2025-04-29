@@ -53,7 +53,24 @@ export const deleteProduct = async (id) => {
     return response.data;
   } catch (error) {
     const errorMessage =
-      error.response?.data?.message || "Product deleted successfully.";
+      error.response?.data?.message || "Product deleted failed.";
     throw new Error(errorMessage);
   }
 };
+
+// Update the product
+
+export const updateProduct = async ({ id, product }) => {
+  try {
+    const response = await axios.put(
+      `https://api.escuelajs.co/api/v1/products/${id}`,
+      product
+    );
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message || "Product update is failed.";
+  }
+};
+
+

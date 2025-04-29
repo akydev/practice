@@ -3,6 +3,7 @@ import {
   addProduct,
   deleteProduct,
   fetchProducts,
+  updateProduct,
   viewProductById,
 } from "../services/productService";
 import {
@@ -15,6 +16,9 @@ import {
   deleteProductError,
   deleteProductRequest,
   deleteProductSuccess,
+  updateProductError,
+  updateProductSuccess,
+  updateProductRequest,
 } from "../slice/productSlice";
 import {
   addProductError,
@@ -71,4 +75,18 @@ export function* deleteProductSaga(action) {
 
 export function* watcherDeleteProductSaga() {
   yield takeEvery(deleteProductRequest, deleteProductSaga);
+}
+
+export function* updateProductSaga(action) {
+  const { id, product } = action.payload;
+  try {
+    const response = yield call(updateProduct, { id, product });
+    yield put(updateProductSuccess(response));
+  } catch (error) {
+    yield put(updateProductError(error));
+  }
+}
+
+export function* watcherUpdateProductSaga() {
+  yield takeEvery(updateProductRequest, updateProductSaga);
 }

@@ -3,6 +3,7 @@ import {
   watcherAddProductSaga,
   watcherDeleteProductSaga,
   watcherProductSaga,
+  watcherUpdateProductSaga,
   watherViewProductSaga,
 } from "./productSaga";
 
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     watherViewProductSaga(),
     watcherAddProductSaga(),
     watcherDeleteProductSaga(),
+    watcherUpdateProductSaga(),
   ]);
 }
