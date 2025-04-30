@@ -66,11 +66,11 @@ export const updateProduct = async ({ id, product }) => {
       `https://api.escuelajs.co/api/v1/products/${id}`,
       product
     );
+    console.log(response.data);
+
     return response.data;
   } catch (error) {
     const errorMessage =
       error.response?.data?.message || "Product update is failed.";
   }
 };
-
-

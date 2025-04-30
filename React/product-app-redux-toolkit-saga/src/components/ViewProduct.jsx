@@ -20,10 +20,16 @@ const ViewProduct = () => {
   return (
     <Container>
       <h1 className="text-center pt-4 text-uppercase">View Product</h1>
-      <Row xs={1} md={2} lg={3} xl={4} className="g-4 py-5">
+      <Row
+        xs={1}
+        md={2}
+        lg={3}
+        xl={4}
+        className="align-items-center justify-content-center py-5"
+      >
         {selectedProduct && (
-          <Col key={selectedProduct.id}>
-            <Card className="h-100">
+          <Col>
+            <Card key={selectedProduct.id}>
               <Carousel>
                 {selectedProduct.images.map((img, index) => (
                   <Carousel.Item key={index}>

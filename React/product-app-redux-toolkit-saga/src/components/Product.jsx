@@ -27,6 +27,10 @@ const Product = () => {
     navigate(`/product/${id}`);
   };
 
+  const handleEdit = (id) => {
+    navigate(`/update-product/${id}`);
+  };
+
   useEffect(() => {
     dispatch(fetchProductRequest());
   }, [dispatch]);
@@ -73,7 +77,12 @@ const Product = () => {
                 >
                   VIEW
                 </Button>
-                <Button variant="outline-success">EDIT</Button>
+                <Button
+                  variant="outline-success"
+                  onClick={() => handleEdit(val.id)}
+                >
+                  EDIT
+                </Button>
                 <Button
                   variant="outline-danger"
                   onClick={() => handleDeleteOpen(val.id)}
